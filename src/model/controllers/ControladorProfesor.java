@@ -1,10 +1,15 @@
 package model.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import model.entities.Materia;
 import model.entities.Profesor;
 
 public class ControladorProfesor {
@@ -132,5 +137,20 @@ public class ControladorProfesor {
 		em.getTransaction().commit();
 		em.close();
 	}
+	
+	public List<Profesor> findAll () {
+		List<Profesor> resultado = new ArrayList<Profesor>();
+		try {
+			EntityManager em = this.factory.createEntityManager();
+			Query q = em.createQuery("SELECT p FROM Profesor p", Profesor.class);
+			resultado = (List<Profesor>) q.getResultList();
+			em.close();
+			return resultado;
+		}
+		catch (NoResultException nrEx) {
+			return null;
+		}
+	}
+
 
 }

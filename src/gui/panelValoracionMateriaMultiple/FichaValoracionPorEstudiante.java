@@ -16,10 +16,11 @@ import model.entities.ValoracionMateria;
 import java.awt.Insets;
 import java.awt.Font;
 
+@SuppressWarnings("serial")
 public class FichaValoracionPorEstudiante extends JPanel {
 	JLabel lblEstudiante;
 	private JTextField jtfValoracion;
-	
+
 	private Profesor profesor;
 	private Materia materia;
 	private Estudiante estudiante;
@@ -29,18 +30,18 @@ public class FichaValoracionPorEstudiante extends JPanel {
 	 * Create the panel.
 	 */
 	public FichaValoracionPorEstudiante(Profesor profesor, Materia materia, Estudiante estudiante) {
-		
+
 		this.profesor = profesor;
 		this.materia = materia;
 		this.estudiante = estudiante;
-		
+
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] { 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
-		
+
 		lblEstudiante = new JLabel("Estudiante:");
 		lblEstudiante.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblEstudiante = new GridBagConstraints();
@@ -49,7 +50,7 @@ public class FichaValoracionPorEstudiante extends JPanel {
 		gbc_lblEstudiante.gridx = 0;
 		gbc_lblEstudiante.gridy = 0;
 		add(lblEstudiante, gbc_lblEstudiante);
-		
+
 		jtfValoracion = new JTextField();
 		GridBagConstraints gbc_jtfValoracion = new GridBagConstraints();
 		gbc_jtfValoracion.fill = GridBagConstraints.HORIZONTAL;
@@ -60,24 +61,24 @@ public class FichaValoracionPorEstudiante extends JPanel {
 
 		configuraFicha();
 	}
-	
-	
+
 	/**
 	 * 
 	 */
 	private void configuraFicha() {
 		// configuro el texto del JLabel para mostrar apellidos y nombre del estudiante
 		if (this.estudiante != null) {
-			lblEstudiante.setText(this.estudiante.getApellido1() + " " + this.estudiante.getApellido2() + ", " +
-					this.estudiante.getNombre());
+			lblEstudiante.setText(this.estudiante.getApellido1() + " " + this.estudiante.getApellido2() + ", "
+					+ this.estudiante.getNombre());
 		}
-		
-		// Busco en la BBDD si ya existe una valoración para el estudiante, materia y profesor seleccionados.
-		this.vActual = ValoracionMateriaControlador.getInstancia().findByMateriaAndProfesorAndEstudiante(materia, profesor, estudiante);
+
+		// Busco en la BBDD si ya existe una valoración para el estudiante, materia y
+		// profesor seleccionados.
+		this.vActual = ValoracionMateriaControlador.getInstancia().findByMateriaAndProfesorAndEstudiante(materia,
+				profesor, estudiante);
 		if (this.vActual != null) {
 			this.jtfValoracion.setText("" + this.vActual.getValoracion());
-		}
-		else {
+		} else {
 			this.vActual = new ValoracionMateria();
 			this.vActual.setMateria(materia);
 			this.vActual.setProfesor(profesor);
@@ -85,7 +86,6 @@ public class FichaValoracionPorEstudiante extends JPanel {
 		}
 	}
 
-	
 	/**
 	 * 
 	 */

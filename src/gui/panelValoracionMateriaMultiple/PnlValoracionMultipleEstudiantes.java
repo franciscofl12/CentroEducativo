@@ -2,6 +2,7 @@ package gui.panelValoracionMateriaMultiple;
 
 import javax.swing.JPanel;
 
+
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -21,6 +22,31 @@ import javax.swing.JScrollPane;
 import model.controllers.ControladorEstudiante;
 import model.controllers.MateriaControlador;
 import model.controllers.ProfesorControlador;
+import model.entities.Estudiante;
+import model.entities.Materia;
+import model.entities.Profesor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.GridBagLayout;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.GridBagConstraints;
+import javax.swing.JComboBox;
+import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import java.awt.Font;
+import javax.swing.JScrollPane;
+
+import model.controllers.ControladorEstudiante;
+import model.controllers.ControladorProfesor;
 import model.entities.Estudiante;
 import model.entities.Materia;
 import model.entities.Profesor;
@@ -141,7 +167,7 @@ public class PnlValoracionMultipleEstudiantes extends JPanel {
 	 * 
 	 */
 	private void cargarProfesores() {
-		List<Profesor> profesores = ProfesorControlador.getInstancia().findAll();
+		List<Profesor> profesores = ControladorProfesor.getInstance().findAll();
 		for (Profesor p : profesores) {
 			this.jcbProfesor.addItem(p);
 		}
